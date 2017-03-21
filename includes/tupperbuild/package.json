@@ -1,0 +1,16 @@
+{
+  "name": "tupperbuild",
+  "version": "1.0.0",
+  "description": "Dockerfile ON BUILD script for meteor-tupperware",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Wessels <undefined.za@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^0.9.2",
+    "lodash": "^3.8.0",
+    "request": "^2.55.0"
+  }
+}
