@@ -1,10 +1,16 @@
 FROM                  node:4.6.2
 
+ENV                   PORT=80 METEOR_RELEASE="1.4.1"
+
 RUN                   apt-get update && apt-get install build-essential g++ python -y
 
-RUN                   curl https://install.meteor.com | sh
-
 COPY                  . /scripts
+
+RUN                   curl https://install.meteor.com -o /scripts/install_meteor.sh
+
+RUN                   sed -i.bak -r 's/RELEASE=".*"/RELEASE=$METEOR_RELEASE/g' /tmp/install_meteor.sh
+
+RUN                   /scripts/install_meteor.sh
 
 RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
 
