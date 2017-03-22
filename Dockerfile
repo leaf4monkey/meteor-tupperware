@@ -1,8 +1,10 @@
 FROM                  node:4.6.2
 
-COPY                  . /scripts
+RUN                   apt-get update && apt-get install build-essential g++ python -y
 
-RUN                   /scripts/env_setup/install_meteor.sh
+RUN                   curl https://install.meteor.com | sh
+
+COPY                  . /scripts
 
 RUN                   /scripts/env_setup/env_setup.sh
 
