@@ -8,7 +8,7 @@ COPY                  . /scripts
 
 RUN                   curl https://install.meteor.com -o /scripts/install_meteor.sh
 
-RUN                   sed -i.bak -r 's/RELEASE=".*"/RELEASE=$METEOR_RELEASE/g' /tmp/install_meteor.sh
+RUN                   sed -i.bak -r 's/RELEASE=".*"/RELEASE=1.4.1/g' /scripts/install_meteor.sh
 
 RUN                   /scripts/install_meteor.sh
 
