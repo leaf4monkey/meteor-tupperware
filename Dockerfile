@@ -10,6 +10,8 @@ RUN                   curl https://install.meteor.com -o /tmp/install_meteor.sh
 
 RUN                   sed -i.bak -r 's/RELEASE=".*"/RELEASE=1.4.1/g' /tmp/install_meteor.sh
 
+RUN                   chmod +x /tmp -R
+
 RUN                   /tmp/install_meteor.sh
 
 RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
@@ -17,8 +19,6 @@ RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
 RUN                   mkdir /home/nodejs/output
 
 RUN                   mkdir /home/nodejs/app
-
-RUN                   chmod +x /tmp -R
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
