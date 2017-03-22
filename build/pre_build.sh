@@ -9,4 +9,4 @@ cd /home/nodejs/app && npm install
 chown -R nodejs:nodejs /home/nodejs/output
 chown -R nodejs:nodejs /home/nodejs/app
 
-sudo chown -Rh joc98 /home/nodejs/app/.meteor/local
+sudo chown -Rh nodejs /home/nodejs/app/.meteor/local
