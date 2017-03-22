@@ -1,8 +1,8 @@
 FROM                  node:4.6.2
 
-RUN                   whoami
+COPY                  . ~/scripts/
 
-COPY                  . ~/scripts
+RUN                   ls -a ~/scripts
 
 RUN                   ~/scripts/env_setup/install_meteor.sh
 
