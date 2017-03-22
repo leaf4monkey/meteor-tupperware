@@ -1,21 +1,23 @@
-FROM          node:4.6.2
+FROM                  node:4.6.2
 
-ENV           NODE_VERSION="4.6.2" PHANTOMJS_VERSION="2.1.1" IMAGEMAGICK_VERSION="8:6.8.9.9-5"
+COPY                  . /scripts
 
-COPY          includes /tupperware
+RUN                   /scripts/env_setup/install_meteor.sh
 
-RUN           sh /tupperware/scripts/_env_setup.sh
+RUN                   /scripts/env_setup/env_setup.sh
 
-RUN           sh /tupperware/scripts/bootstrap.sh
+ONBUILD ADD           package.json /home/nodejs/app/
 
-EXPOSE        80
+ONBUILD RUN           npm install
 
-# COPY        package.json .
-ONBUILD COPY  ./ /home/nodejs/app
-ONBUILD RUN   chown -R nodejs:nodejs /home/nodejs/app
-ONBUILD USER  nodejs
-ONBUILD WORKDIR /home/nodejs/app
+ONBUILD COPY          . /home/nodejs/app
 
-ONBUILD RUN   sh /tupperware/scripts/on_build.sh
+ONBUILD RUN           /scripts/build/pre_build.sh
 
-ENTRYPOINT    sh /tupperware/scripts/start_app.sh
+ONBUILD USER          nodejs
+
+ONBUILD RUN           /scripts/build/build.sh
+
+ONBUILD RUN           /scripts/build/post_build.sh
+
+ENTRYPOINT            /scripts/run/startup.sh
