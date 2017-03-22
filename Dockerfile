@@ -6,7 +6,13 @@ RUN                   curl https://install.meteor.com | sh
 
 COPY                  . /scripts
 
-RUN                   /scripts/env_setup/env_setup.sh
+RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
+
+RUN                   mkdir /home/nodejs/output
+
+RUN                   mkdir /home/nodejs/app
+
+RUN                   chmod +x /scripts -R
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
