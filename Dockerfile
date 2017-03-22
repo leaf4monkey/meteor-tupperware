@@ -22,9 +22,9 @@ RUN                   mkdir /home/nodejs/app
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
-ONBUILD RUN           npm install
+ONBUILD RUN           cd /home/nodejs/app/ && npm install
 
-ONBUILD COPY          . /home/nodejs/app
+ONBUILD COPY          ./ /home/nodejs/app
 
 ONBUILD RUN           /tmp/build/pre_build.sh
 
