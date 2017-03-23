@@ -20,4 +20,4 @@ RUN           /tmp/build/post_build.sh
 
 USER          nodejs
 
-ENTRYPOINT    /tmp/run/startup.sh
+WORKDIR       /home/nodejs/output/bundle
