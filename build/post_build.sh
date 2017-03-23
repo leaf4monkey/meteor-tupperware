@@ -5,7 +5,7 @@ npm install
 
 chown -Rh nodejs:nodejs /home/nodejs/output
 
-rm /usr/local/bin/meteor && rm -rf ~/.meteor
+rm /usr/local/bin/meteor && rm -rf /home/nodejs/.meteor
 
 # Purge build deps
 apt-get purge -y build-essential g++ python
