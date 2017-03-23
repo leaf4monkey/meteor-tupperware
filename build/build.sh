@@ -1,5 +1,5 @@
 #!/bin/sh
 meteor build --server-only --directory /home/nodejs/output
 
-cd /home/nodejs/output
+cd /home/nodejs/output/bundle/programs/server
 npm install
