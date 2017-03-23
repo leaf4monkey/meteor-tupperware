@@ -1,6 +1,6 @@
 FROM                  node:4.6.2
 
-ENV                   PORT=80 METEOR_RELEASE="1.4.1" METEOR_NO_RELEASE_CHECK=true
+ENV                   PORT=80 METEOR_RELEASE=1.4.1 METEOR_NO_RELEASE_CHECK=true
 
 RUN                   apt-get update && apt-get install build-essential g++ python -y
 
