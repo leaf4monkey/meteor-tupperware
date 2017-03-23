@@ -1,5 +1,3 @@
-FROM                  debian:jessie
-
 FROM                  node:4.6.2-slim
 
 ENV                   PORT=80 METEOR_RELEASE=1.4.1 METEOR_NO_RELEASE_CHECK=true
