@@ -5,8 +5,3 @@ if [ ! -d "/home/nodejs/app/.meteor" ]; then
 fi
 
 cd /home/nodejs/app && npm install
-
-chown -R nodejs:nodejs /home/nodejs/output
-chown -R nodejs:nodejs /home/nodejs/app
-
-chown -Rh nodejs /home/nodejs/app/.meteor/local
