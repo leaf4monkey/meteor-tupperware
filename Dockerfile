@@ -1,8 +1,10 @@
 FROM                  registry.aliyuncs.com/becool_tech/meteor-tupperware:setup
 
+COPY                  ./run/* /scripts/
+
 COPY                  . /tmp
 
-RUN                   chmod +x /tmp -R
+RUN                   chmod +x /tmp -R && chmod +x /scripts -R
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
