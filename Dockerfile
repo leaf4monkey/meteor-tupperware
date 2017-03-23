@@ -24,6 +24,4 @@ ONBUILD RUN           ls /home/nodejs/output/bundle -la
 
 ONBUILD RUN           sh /tmp/build/post_build.sh
 
-ONBUILD USER          nodejs
-
 ONBUILD WORKDIR       /home/nodejs/output/bundle
