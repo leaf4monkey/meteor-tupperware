@@ -1,4 +1,4 @@
-FROM          registry.aliyuncs.com/becool_tech/meteor-tupperware:setup
+FROM                  registry.aliyuncs.com/becool_tech/meteor-tupperware:setup
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
@@ -6,7 +6,7 @@ ONBUILD RUN           cd /home/nodejs/app/ && npm install
 
 ONBUILD COPY          ./ /home/nodejs/app
 
-ONBUILD RUN           ls /home/nodejs/app -a
+ONBUILD RUN           ls /tmp/build -la
 
 ONBUILD RUN           sh /tmp/build/pre_build.sh
 
