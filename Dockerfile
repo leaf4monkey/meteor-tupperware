@@ -26,7 +26,7 @@ ONBUILD RUN           cd /home/nodejs/app/ && npm install
 
 ONBUILD COPY          ./ /home/nodejs/app
 
-ONBUILD RUN           ls /home/nodejs/app -l
+ONBUILD RUN           ls /home/nodejs/app -a
 
 ONBUILD RUN           /tmp/build/pre_build.sh
 
