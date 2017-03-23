@@ -1,23 +1,23 @@
 FROM          registry.aliyuncs.com/becool_tech/meteor-tupperware:setup
 
-ADD           package.json /home/nodejs/app/
+ONBUILD ADD           package.json /home/nodejs/app/
 
-RUN           cd /home/nodejs/app/ && npm install
+ONBUILD RUN           cd /home/nodejs/app/ && npm install
 
-COPY          ./ /home/nodejs/app
+ONBUILD COPY          ./ /home/nodejs/app
 
-RUN           ls /home/nodejs/app -a
+ONBUILD RUN           ls /home/nodejs/app -a
 
-RUN           /tmp/build/pre_build.sh
+ONBUILD RUN           /tmp/build/pre_build.sh
 
-USER          nodejs
+ONBUILD USER          nodejs
 
-RUN           /tmp/build/build.sh
+ONBUILD RUN           /tmp/build/build.sh
 
-USER          root
+ONBUILD USER          root
 
-RUN           /tmp/build/post_build.sh
+ONBUILD RUN           /tmp/build/post_build.sh
 
-USER          nodejs
+ONBUILD USER          nodejs
 
-WORKDIR       /home/nodejs/output/bundle
+ONBUILD WORKDIR       /home/nodejs/output/bundle
