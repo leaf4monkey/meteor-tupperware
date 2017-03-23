@@ -1,23 +1,22 @@
 FROM                  node:4.6.2
 
-ENV                   PORT=80 METEOR_RELEASE="1.4.1"
+ENV                   PORT=80 METEOR_RELEASE="1.4.1" METEOR_NO_RELEASE_CHECK=true
 
 RUN                   apt-get update && apt-get install build-essential g++ python -y
 
+RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
+
 COPY                  . /tmp
 
-#RUN export METEOR_NO_RELEASE_CHECK=true
-#RUN curl https://install.meteor.com/?release=1.4.1 | sh
+USER                  nodejs
 
-RUN                   curl https://install.meteor.com -o /tmp/install_meteor.sh
+RUN                   curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh
 
-RUN                   sed -i.bak -r 's/RELEASE=".*"/RELEASE=1.4.1/g' /tmp/install_meteor.sh
+USER                  root
+
+RUN                   cp /home/nodejs/.meteor/packages/meteor-tool/${METEOR_RELEASE}/mt-os.linux.x86_64/scripts/admin/launch-meteor /usr/local/bin/meteor
 
 RUN                   chmod +x /tmp -R
-
-RUN                   /tmp/install_meteor.sh
-
-RUN                   groupadd -r nodejs && useradd -m -r -g nodejs nodejs
 
 RUN                   mkdir /home/nodejs/output
 

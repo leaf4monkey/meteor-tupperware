@@ -1,7 +1,6 @@
 #!/bin/sh
 
 chown -R nodejs:nodejs /home/nodejs/output
-chown -Rh nodejs:nodejs /home/nodejs/app
 
 rm /usr/local/bin/meteor && rm -rf ~/.meteor
 
