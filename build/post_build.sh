@@ -1,5 +1,8 @@
 #!/bin/sh
 
+cd /home/nodejs/output/bundle/programs/server
+npm install
+
 chown -Rh nodejs:nodejs /home/nodejs/output
 
 rm /usr/local/bin/meteor && rm -rf ~/.meteor
