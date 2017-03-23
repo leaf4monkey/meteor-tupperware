@@ -8,15 +8,15 @@ ONBUILD COPY          ./ /home/nodejs/app
 
 ONBUILD RUN           ls /home/nodejs/app -a
 
-ONBUILD RUN           /tmp/build/pre_build.sh
+ONBUILD RUN           sh /tmp/build/pre_build.sh
 
 ONBUILD USER          nodejs
 
-ONBUILD RUN           /tmp/build/build.sh
+ONBUILD RUN           sh /tmp/build/build.sh
 
 ONBUILD USER          root
 
-ONBUILD RUN           /tmp/build/post_build.sh
+ONBUILD RUN           sh /tmp/build/post_build.sh
 
 ONBUILD USER          nodejs
 
