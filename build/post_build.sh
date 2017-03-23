@@ -5,6 +5,8 @@ npm install
 
 chown -Rh nodejs:nodejs /home/nodejs/output
 
+rm -rf /home/nodejs/app
+
 rm /usr/local/bin/meteor && rm -rf /home/nodejs/.meteor
 
 # Purge build deps
