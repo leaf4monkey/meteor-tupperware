@@ -9,6 +9,8 @@ RUN                   chmod +x /tmp -R && \
                       chown -Rh nodejs:nodejs /home/nodejs/output && \
                       chown -R nodejs:nodejs /var/log
 
+ONBUILD ENV           PORT=3000
+
 ONBUILD ADD           package.json /home/nodejs/app/
 
 ONBUILD RUN           cd /home/nodejs/app/ && npm install
@@ -22,8 +24,6 @@ ONBUILD USER          nodejs
 ONBUILD RUN           sh /tmp/build/build.sh
 
 ONBUILD USER          root
-
-ONBUILD RUN           ls /home/nodejs/output/bundle -la
 
 ONBUILD RUN           sh /tmp/build/post_build.sh
 
