@@ -36,7 +36,7 @@ rm -rf /tmp/*
 # Clear npm cache
 npm cache clear
 yarn cache clean
-npm uninstall yarn
+npm uninstall yarn -g
 
 if [ -z "$PORT" ]; then
   export PORT=3000

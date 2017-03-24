@@ -25,6 +25,4 @@ ONBUILD RUN           apt-get update && apt-get install build-essential g++ pyth
 
                       sh /tmp/build/post_build.sh
 
-ONBUILD USER          node
-
 ONBUILD WORKDIR       /home/node/output/bundle
