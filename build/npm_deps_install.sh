@@ -1,1 +1,1 @@
-(cd /home/node/app/ && npm install)
+(cd /home/node/app/ && yarn install)

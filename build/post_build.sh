@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd /home/node/output/bundle/programs/server
-npm install
+yarn install
 
 rm -rf /home/node/app
 
@@ -33,6 +33,7 @@ rm -rf /tmp/*
 
 # Clear npm cache
 npm cache clear
+yarn cache clean
 
 if [ -z "$PORT" ]; then
   export PORT=3000
