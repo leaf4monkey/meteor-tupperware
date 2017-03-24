@@ -4,19 +4,18 @@ COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
 
-RUN                   mkdir /home/node/output && mkdir /home/node/app
-
-ONBUILD ADD           package.json /home/node/app/
-
-ONBUILD RUN           sh /tmp/build/npm_deps_install.sh
+RUN                   mkdir /home/node/output && mkdir /home/node/app && \
+                      chown -R node:node /var/log && \
+                      chmod +x /tmp -R && chmod +x /scripts -R && \
+                      npm install -g yarn
 
 ONBUILD COPY          ./ /home/node/app
 
 ONBUILD ENV           PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
 
 ONBUILD RUN           apt-get update && apt-get install build-essential g++ python -y --no-install-recommends&& \
-                      chown -R node:node /var/log && \
-                      chmod +x /tmp -R && chmod +x /scripts -R && \
+
+                      sh /tmp/build/npm_deps_install.sh && \
 
                       curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh && \
 
