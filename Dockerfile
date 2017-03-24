@@ -13,7 +13,7 @@ ONBUILD ENV           PORT=3000
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
-ONBUILD RUN           sh /tmp/build/npm_deps_install
+ONBUILD RUN           sh /tmp/build/npm_deps_install.sh
 
 ONBUILD COPY          ./ /home/nodejs/app
 
