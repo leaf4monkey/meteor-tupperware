@@ -16,17 +16,15 @@ USER                  root
 
 RUN                   chmod +x /tmp -R && /tmp/env_setup/env_setup.sh
 
+ONBUILD USER          node
+
 ONBUILD ADD           package.json /home/node/app/
 
 ONBUILD RUN           sh /tmp/build/npm_deps_install.sh
 
 ONBUILD COPY          ./ /home/node/app
 
-ONBUILD RUN           sh /tmp/build/pre_build.sh
-
-ONBUILD USER          node
-
-ONBUILD RUN           sh /tmp/build/build.sh
+ONBUILD RUN           sh /tmp/build/pre_build.sh && sh /tmp/build/build.sh
 
 ONBUILD USER          root
 
