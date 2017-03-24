@@ -8,7 +8,6 @@ cp $LAUNCHER /usr/local/bin/meteor
 mkdir /home/nodejs/output
 mkdir /home/nodejs/app
 
-chmod +x /tmp -R
 chmod +x /scripts -R
 chown -Rh nodejs:nodejs /home/nodejs/output
 chown -R nodejs:nodejs /var/log

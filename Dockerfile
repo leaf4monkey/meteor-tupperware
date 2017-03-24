@@ -15,7 +15,7 @@ RUN                   curl https://install.meteor.com/?release=${METEOR_RELEASE}
 
 USER                  root
 
-RUN                   /tmp/env_setup/env_setup.sh
+RUN                   chmod +x /tmp -R && /tmp/env_setup/env_setup.sh
 
 ONBUILD ADD           package.json /home/nodejs/app/
 
