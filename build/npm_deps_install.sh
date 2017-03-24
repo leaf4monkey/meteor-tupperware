@@ -1,0 +1,1 @@
+(cd /home/nodejs/app/ && npm install)

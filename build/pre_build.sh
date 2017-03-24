@@ -4,8 +4,5 @@ if [ ! -d "/home/nodejs/app/.meteor" ]; then
   exit 1
 fi
 
-echo npm install
-cd /home/nodejs/app && npm install
-
 echo change owner of "/home/nodejs/app" as nodejs:nodejs
 chown -Rh nodejs:nodejs /home/nodejs/app
