@@ -7,7 +7,7 @@ chown -R node:node /home/node/output
 
 rm -rf /home/node/app
 
-rm /usr/local/bin/meteor && rm -rf /home/node/.meteor
+rm /usr/local/bin/meteor && rm -rf ~/.meteor
 
 # Purge build deps
 apt-get purge -y build-essential g++ python
