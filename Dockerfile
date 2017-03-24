@@ -6,9 +6,11 @@ COPY                  . /tmp
 
 ENV                   PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_NO_RELEASE_CHECK=true
 
-RUN                   apt-get update && apt-get install build-essential g++ python -y && \
+RUN                   apt-get update && apt-get install build-essential g++ python -y --no-install-recommends&& \
                       chown -R node:node /var/log && \
                       chmod +x /tmp -R && chmod +x /scripts -R
+
+RUN                   su node && whoami
 
 USER                  node
 
