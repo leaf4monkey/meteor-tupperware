@@ -1,13 +1,13 @@
 #!/bin/sh
-METEOR_SYMLINK_TARGET="$(readlink "/home/nodejs/.meteor/meteor")"
+METEOR_SYMLINK_TARGET="$(readlink "/home/node/.meteor/meteor")"
 METEOR_TOOL_DIRECTORY="$(dirname "$METEOR_SYMLINK_TARGET")"
-LAUNCHER="/home/nodejs/.meteor/$METEOR_TOOL_DIRECTORY/scripts/admin/launch-meteor"
+LAUNCHER="/home/node/.meteor/$METEOR_TOOL_DIRECTORY/scripts/admin/launch-meteor"
 
 cp $LAUNCHER /usr/local/bin/meteor
 
-mkdir /home/nodejs/output
-mkdir /home/nodejs/app
+mkdir /home/node/output
+mkdir /home/node/app
 
 chmod +x /scripts -R
-chown -Rh nodejs:nodejs /home/nodejs/output
-chown -R nodejs:nodejs /var/log
+chown -Rh node:node /home/node/output
+chown -R node:node /var/log

@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /home/nodejs/app
-meteor build --server-only --directory /home/nodejs/output
+cd /home/node/app
+meteor build --server-only --directory /home/node/output

@@ -1,2 +1,2 @@
 #!/bin/sh
-exec node /home/nodejs/output/bundle/main.js "$@"
+exec node /home/node/output/bundle/main.js "$@"

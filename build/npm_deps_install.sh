@@ -1,1 +1,1 @@
-(cd /home/nodejs/app/ && npm install)
+(cd /home/node/app/ && npm install)

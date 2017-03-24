@@ -1,13 +1,11 @@
 #!/bin/sh
 
-cd /home/nodejs/output/bundle/programs/server
+cd /home/node/output/bundle/programs/server
 npm install
 
-chown -Rh nodejs:nodejs /home/nodejs/output
+rm -rf /home/node/app
 
-rm -rf /home/nodejs/app
-
-rm /usr/local/bin/meteor && rm -rf /home/nodejs/.meteor
+rm /usr/local/bin/meteor && rm -rf /home/node/.meteor
 
 # Purge build deps
 apt-get purge -y build-essential g++ python
