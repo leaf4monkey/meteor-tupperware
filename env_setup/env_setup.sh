@@ -1,10 +1,14 @@
 #!/bin/sh
-groupadd -r nodejs && useradd -m -r -g nodejs nodejs
+METEOR_SYMLINK_TARGET="$(readlink "/home/nodejs/.meteor/meteor")"
+METEOR_TOOL_DIRECTORY="$(dirname "$METEOR_SYMLINK_TARGET")"
+LAUNCHER="/home/nodejs/.meteor/$METEOR_TOOL_DIRECTORY/scripts/admin/launch-meteor"
+
+cp $LAUNCHER /usr/local/bin/meteor
 
 mkdir /home/nodejs/output
 mkdir /home/nodejs/app
-chmod +x /tmp -R
 
-# install dumb-init
-#wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
-#chmod +x /usr/local/bin/dumb-init
+chmod +x /tmp -R
+chmod +x /scripts -R
+chown -Rh nodejs:nodejs /home/nodejs/output
+chown -R nodejs:nodejs /var/log

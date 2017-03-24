@@ -1,15 +1,21 @@
-FROM                  registry.aliyuncs.com/becool_tech/meteor-tupperware:setup
+FROM                  node:4.6.2-slim
 
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
 
-RUN                   chmod +x /tmp -R && \
-                      chmod +x /scripts -R && \
-                      chown -Rh nodejs:nodejs /home/nodejs/output && \
-                      chown -R nodejs:nodejs /var/log
+ENV                   PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_NO_RELEASE_CHECK=true
 
-ONBUILD ENV           PORT=3000
+RUN                   apt-get update && apt-get install build-essential g++ python -y && \
+                      groupadd -r nodejs && useradd -m -r -g nodejs nodejs
+
+USER                  nodejs
+
+RUN                   curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh
+
+USER                  root
+
+RUN                   /tmp/env_setup/env_setup.sh
 
 ONBUILD ADD           package.json /home/nodejs/app/
 

@@ -36,3 +36,6 @@ rm -rf /tmp/*
 # Clear npm cache
 npm cache clear
 
+if [ -z "$PORT" ]; then
+  export PORT=3000
+fi
