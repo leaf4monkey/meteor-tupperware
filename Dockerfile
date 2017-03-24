@@ -21,6 +21,8 @@ ONBUILD RUN           sh /tmp/build/npm_deps_install.sh
 
 ONBUILD COPY          ./ /home/node/app
 
+ONBUILD RUN           ls /home/node/ -l
+
 ONBUILD RUN           sh /tmp/build/pre_build.sh && sh /tmp/build/build.sh
 
 ONBUILD USER          root
