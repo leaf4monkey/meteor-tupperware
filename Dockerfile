@@ -4,18 +4,7 @@ COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
 
-ENV                   PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_NO_RELEASE_CHECK=true
-
-RUN                   apt-get update && apt-get install build-essential g++ python -y --no-install-recommends&& \
-                      chown -R node:node /var/log && \
-                      chmod +x /tmp -R && chmod +x /scripts -R
-
-RUN                   su node && whoami
-
-USER                  node
-
-RUN                   curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh && \
-                      sh /tmp/env_setup/env_setup.sh
+RUN                   mkdir /home/node/output && mkdir /home/node/app
 
 ONBUILD ADD           package.json /home/node/app/
 
@@ -23,13 +12,19 @@ ONBUILD RUN           sh /tmp/build/npm_deps_install.sh
 
 ONBUILD COPY          ./ /home/node/app
 
-ONBUILD RUN           ls /home/node/app -la
+ONBUILD ENV           PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
 
-ONBUILD RUN           sh /tmp/build/pre_build.sh && sh /tmp/build/build.sh
+ONBUILD RUN           apt-get update && apt-get install build-essential g++ python -y --no-install-recommends&& \
+                      chown -R node:node /var/log && \
+                      chmod +x /tmp -R && chmod +x /scripts -R && \
 
-ONBUILD USER          root
+                      curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh && \
 
-ONBUILD RUN           sh /tmp/build/post_build.sh
+                      sh /tmp/build/pre_build.sh && \
+
+                      sh /tmp/build/build.sh && \
+
+                      sh /tmp/build/post_build.sh
 
 ONBUILD USER          node
 
