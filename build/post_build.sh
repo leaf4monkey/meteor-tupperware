@@ -5,7 +5,7 @@ npm install
 
 rm -rf /home/node/app
 
-rm /usr/local/bin/meteor && rm -rf /home/node/.meteor
+rm /home/node/meteor && rm -rf /home/node/.meteor
 
 # Purge build deps
 apt-get purge -y build-essential g++ python
