@@ -10,3 +10,13 @@ fi
 
 node /tmp/hooks/pre_build.js
 sh /tmp/hooks/pre_build_env_setup.sh
+
+echo "current meteor settings:"
+echo METEOR_SETTINGS=$METEOR_SETTINGS
+
+if [ -z "$METEOR_SETTINGS" ]; then
+  export 'METEOR_SETTINGS=$DFT_METEOR_SETTINGS'
+fi
+
+echo "check default meteor settings:"
+echo DFT_METEOR_SETTINGS=$DFT_METEOR_SETTINGS
