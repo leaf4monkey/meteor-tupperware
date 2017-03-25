@@ -48,7 +48,7 @@ var log = {
 
 function appendFile (name, data) {
     try {
-        return fs.appendFileSync('/tmp/hooks/' + name + '_build_env_setup.sh', data, 'utf8');
+        return fs.appendFileSync('/tmp/hooks/' + name + '_build_env_setup.sh', '\n' + data + '\n', 'utf8');
     } catch (e) {
         console.log('error occur:', e);
     }

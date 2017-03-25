@@ -58,7 +58,7 @@ function loadSettings (done) {
     console.log('type of settings:', typeof settings, 'len=', settings.length);
     console.log(settings);
     if (_.isString(settings) && settings.length) {
-        appendFile('export \'DFT_METEOR_SETTINGS=' + settings + '\'\n');
+        appendFile('export \'DFT_METEOR_SETTINGS=' + settings + '\'');
         log.info('Settings in settings.json registered.');
     } else {
         log.info('No settings.json found.');
@@ -76,7 +76,7 @@ function selectMeteorVersion (done) {
 
     if (meteorVersion && meteorVersion !== process.env.METEOR_RELEASE) {
         log.info(meteorVersion, process.env.METEOR_RELEASE);
-        appendFile('export METEOR_RELEASE="' + meteorVersion + '"\n');
+        appendFile('export METEOR_RELEASE="' + meteorVersion + '"');
         log.info('meteor version switched as "' + meteorVersion + '".');
     }
     done();
@@ -86,7 +86,7 @@ function setBuildFlags (done) {
     var additionalFlags = tupperwareJson.buildOptions.additionalFlags || '';
 
     if (additionalFlags) {
-        appendFile('export ADDITIONAL_FLAGS="' + additionalFlags + '"\n');
+        appendFile('export ADDITIONAL_FLAGS="' + additionalFlags + '"');
     }
     done();
 }
@@ -95,7 +95,7 @@ function checkUser (done) {
     var user = tupperwareJson.runAsRoot ? 'root' : 'node';
 
     appendFile('export APP_RUNNING_USER=' + user);
-    log.info('Application will run with user: ' + user + '.\n');
+    log.info('Application will run with user: ' + user + '.');
     done();
 }
 
