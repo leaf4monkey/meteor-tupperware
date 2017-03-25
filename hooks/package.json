@@ -1,7 +1,7 @@
 {
   "name": "tupperbuild",
   "version": "1.0.0",
-  "description": "Dockerfile ON BUILD script for meteor-tupperware",
+  "description": "Dockerfile ON BUILD script for meteor-builder",
   "main": "pre_build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

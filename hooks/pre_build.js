@@ -66,7 +66,53 @@ function loadSettings (done) {
     }
 }
 
+function selectMeteorVersion (done) {
+    var versionRegex = new RegExp('^METEOR@(.*)\n', 'ig');
+
+    var meteorReleaseString = fs.readFileSync(copyPath + '/.meteor/release');
+    var matches = versionRegex.exec(meteorReleaseString);
+
+    var meteorVersion = matches[1];
+
+    log.info('Downloading Meteor ' + meteorVersion + ' Installer...');
+
+    if (meteorVersion && meteorVersion !== process.env.METEOR_RELEASE) {
+        log.info(meteorVersion, process.env.METEOR_RELEASE);
+        var cmd = 'export METEOR_RELEASE=' + meteorVersion;
+        child_process.exec(cmd, {
+            cwd: copyPath
+        }, _.partial(handleExecError, done, cmd, 'switch meteor version'));
+        log.info('meteor version switched as "' + meteorVersion + '".');
+    } else {
+        done();
+    }
+}
+
+function setBuildFlags (done) {
+    var additionalFlags = tupperwareJson.buildOptions.additionalFlags || '';
+
+    if (!additionalFlags) {
+        return done();
+    }
+    var cmd = 'export ADDITIONAL_FLAGS=' + additionalFlags;
+    child_process.exec(cmd, {
+        cwd: copyPath
+    }, _.partial(handleExecError, done, cmd, 'concat additional flags'));
+}
+
+function checkUser (done) {
+    var user = tupperwareJson.runAsRoot ? 'root' : 'node';
+
+    var cmd = 'export APP_RUNNING_USER=' + user;
+    child_process.exec(cmd, {
+        cwd: copyPath
+    }, _.partial(handleExecError, done, cmd, 'decide running user'));
+}
+
 async.series([
     runPreBuildCommands,
-    loadSettings
+    loadSettings,
+    selectMeteorVersion,
+    setBuildFlags,
+    checkUser
 ]);

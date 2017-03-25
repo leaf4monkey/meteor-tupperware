@@ -1,12 +1,12 @@
-# chriswessels/meteor-tupperware
+# chriswessels/meteor-meteorbuilder
 
 This is a base Docker image that allows you to bundle your [Meteor.js](https://www.meteor.com) application into a lean, production-ready Docker image that you can deploy across your containerised infrastructure.
 
-[![Docker Repository on Quay.io](https://quay.io/repository/chriswessels/meteor-tupperware/status "Docker Repository on Quay.io")](https://quay.io/repository/chriswessels/meteor-tupperware)
+[![Docker Repository on Quay.io](https://quay.io/repository/chriswessels/meteor-meteorbuilder/status "Docker Repository on Quay.io")](https://quay.io/repository/chriswessels/meteor-meteorbuilder)
 
-It includes [Node.js](https://nodejs.org/) and your bundled application (with platform-correct native extensions where required by included npm modules). You can also configure meteor-tupperware to install PhantomJS and ImageMagick if these are dependencies of your application.
+It includes [Node.js](https://nodejs.org/) and your bundled application (with platform-correct native extensions where required by included npm modules). You can also configure meteor-meteorbuilder to install PhantomJS and ImageMagick if these are dependencies of your application.
 
-Please see the [CHANGELOG](https://github.com/chriswessels/meteor-tupperware/blob/master/CHANGELOG.md) for the latest bundled library versions and changes.
+Please see the [CHANGELOG](https://github.com/chriswessels/meteor-meteorbuilder/blob/master/CHANGELOG.md) for the latest bundled library versions and changes.
 
 ## Usage
 
@@ -14,7 +14,7 @@ Please see the [CHANGELOG](https://github.com/chriswessels/meteor-tupperware/blo
 
 In your Meteor.js project directory, run the following command:
 
-    curl https://raw.githubusercontent.com/chriswessels/meteor-tupperware/master/quickstart.sh > /tmp/quickstart.sh && bash /tmp/quickstart.sh
+    curl https://raw.githubusercontent.com/chriswessels/meteor-meteorbuilder/master/quickstart.sh > /tmp/quickstart.sh && bash /tmp/quickstart.sh
 
 This script will write a `Dockerfile` and `.dockerignore` into your current directory, preconfigured as in **Manual Setup** below.
 
@@ -24,9 +24,9 @@ After running the quickstart script, and assuming you have Docker running, you c
 
 #### Manual setup (skip if you used Quickstart)
 
-Using meteor-tupperware is very simple. Create a `Dockerfile` in your Meteor project directory with the following contents:
+Using meteor-meteorbuilder is very simple. Create a `Dockerfile` in your Meteor project directory with the following contents:
 
-    FROM    quay.io/chriswessels/meteor-tupperware
+    FROM    quay.io/chriswessels/meteor-meteorbuilder
 
 This base image contains build triggers that will run when you build your app image. These triggers will build your app, install any dependencies, and leave you with a lean, production-ready image.
 
@@ -48,7 +48,7 @@ The root process of the image will be set to the Node.js entrypoint for your Met
 
 Node.js will listen on port 80 inside the container, but you can bind this to any port on the host. You can also specify a different internal port if you need to like this:
 
-    FROM    quay.io/chriswessels/meteor-tupperware
+    FROM    quay.io/chriswessels/meteor-meteorbuilder
     ENV     PORT=8080
 
 Example of passing options into `docker run` at runtime:
@@ -64,17 +64,17 @@ This example will run your Meteor application configured to connect to Mongo at 
 
 Example of baking options into your image using your `Dockerfile` so you don't have to pass them in at runtime:
 
-    FROM    quay.io/chriswessels/meteor-tupperware
+    FROM    quay.io/chriswessels/meteor-meteorbuilder
     ENV     MONGO_URL="mongodb://url" MONGO_OPLOG_URL="mongodb://oplog_url" ROOT_URL="http://yourapp.com"
 
 ## Build configuration
 
-meteor-tupperware supports a few build configuration options that can be modified by creating a `tupperware.json` file in your Meteor project directory, alongside your `Dockerfile`. After changing `tupperware.json` you will need to rebuild your image with `docker build` (as above).
+meteor-meteorbuilder supports a few build configuration options that can be modified by creating a `meteorbuilder.json` file in your Meteor project directory, alongside your `Dockerfile`. After changing `meteorbuilder.json` you will need to rebuild your image with `docker build` (as above).
 
 Default configuration options:
 
 ```javascript
-/* tupperware.json */
+/* meteorbuilder.json */
 {
   "dependencies": {
     "phantomJs": false,
@@ -89,7 +89,7 @@ Default configuration options:
 }
 ```
 
-### tupperware.json Schema
+### meteorbuilder.json Schema
 
 - dependencies
   - phantomJs: `true` or `false` (for installing PhantomJS)
@@ -102,7 +102,7 @@ Default configuration options:
 
 ### Pre and post build commands
 
-As above, you can use the `preBuildCommands` option in `tupperware.json` to specify a list of commands that should be run prior to `meteor build`. You can use `postBuildCommands` to specify a list of commands that should be run after. The commands are executed within your app directory (`/app` with the container image).
+As above, you can use the `preBuildCommands` option in `meteorbuilder.json` to specify a list of commands that should be run prior to `meteor build`. You can use `postBuildCommands` to specify a list of commands that should be run after. The commands are executed within your app directory (`/app` with the container image).
 
 This can be useful for installing private smart packages for your Meteor app prior to building, or performing post build transformations/cleanup.
 

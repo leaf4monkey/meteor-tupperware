@@ -11,17 +11,21 @@ var copyPath = '/home/node/app';
 
 var tupperwareJsonDefaults = {
     "preBuildCommands": [],
-    "postBuildCommands": []
+    "postBuildCommands": [],
+    "buildOptions": {
+        "additionalFlags": false
+    },
+    "runAsRoot": true
 };
 
 function extractTupperwareJson () {
     var tupperwareJson = {};
-    /* Attempt to read in tupperware.json file for settings */
+    /* Attempt to read in meteorbuilder.json file for settings */
     try {
-        tupperwareJson = require(copyPath + '/tupperware.json');
-        log.info('Settings in tupperware.json registered.');
+        tupperwareJson = require(copyPath + '/meteorbuilder.json');
+        log.info('Settings in meteorbuilder.json registered.');
     } catch (e) {
-        log.info('No tupperware.json found, using defaults.');
+        log.info('No meteorbuilder.json found, using defaults.');
     }
 
     /* Patch object with defaults for anything undefined */
