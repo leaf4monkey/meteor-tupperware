@@ -1,5 +1,7 @@
 FROM                  node:4.8.1-slim
 
+RUN                   ls -la ~
+
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
@@ -12,7 +14,7 @@ ONBUILD COPY          ./ /home/node/app
 
 ONBUILD ENV           PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
 
-ONBUILD RUN           apt-get update && apt-get install build-essential g++ python -y --no-install-recommends&& \
+ONBUILD RUN           apt-get update && apt-get install build-essential g++ python make -y --no-install-recommends&& \
 
                       sh /tmp/build/npm_deps_install.sh && \
 
