@@ -1,4 +1,4 @@
-FROM                  node:4.6.2-slim
+FROM                  node:4.8.1-slim
 
 COPY                  ./run/* /scripts/
 
