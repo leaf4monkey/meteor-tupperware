@@ -55,7 +55,7 @@ function loadSettings (done) {
     }
 
     if (_.isString(settings) && settings.length) {
-        var cmd = 'export DFT_METEOR_SETTINGS=' + settings;
+        var cmd = 'export \'DFT_METEOR_SETTINGS=' + settings + '\'';
         child_process.exec(cmd, {
             cwd: copyPath
         }, _.partial(handleExecError, done, cmd, 'load settings.json'));
@@ -94,7 +94,7 @@ function setBuildFlags (done) {
     if (!additionalFlags) {
         return done();
     }
-    var cmd = 'export ADDITIONAL_FLAGS=' + additionalFlags;
+    var cmd = 'export ADDITIONAL_FLAGS="' + additionalFlags + '"';
     child_process.exec(cmd, {
         cwd: copyPath
     }, _.partial(handleExecError, done, cmd, 'concat additional flags'));
