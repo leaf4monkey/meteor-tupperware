@@ -50,10 +50,10 @@ function appendFile (name, data) {
     name = '/tmp/hooks/' + name + '_build_env_setup.sh';
     try {
         console.log('append cli: \n');
-        console.log(data);
         fs.appendFileSync(name, '\n', 'utf8');
         fs.appendFileSync(name, data, 'utf8');
         fs.appendFileSync(name, '\n', 'utf8');
+        console.log(data);
     } catch (e) {
         console.log('error occur:', e);
     }
