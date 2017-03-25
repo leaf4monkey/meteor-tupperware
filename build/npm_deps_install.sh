@@ -1,3 +1,2 @@
-npm install -g yarn
-yarn install -g node-gyp
+yarn global add node-gyp
 (cd /home/node/app/ && yarn install)
