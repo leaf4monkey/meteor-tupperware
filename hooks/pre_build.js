@@ -54,6 +54,8 @@ function loadSettings (done) {
         console.log('It sames that settings.json is not good json-format');
     }
 
+    console.log('type of settings:', typeof settings, 'len=', settings.length);
+    console.log(settings);
     if (_.isString(settings) && settings.length) {
         var cmd = 'export \'DFT_METEOR_SETTINGS=' + settings + '\'';
         child_process.exec(cmd, {
