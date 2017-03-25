@@ -3,6 +3,8 @@
  * @fileoverview 请填写简要的文件说明.
  * @author joc (Chen Wen)
  */
+"use strict";
+
 var _ = require('lodash'),
     async = require('async'),
     child_process = require('child_process'),
