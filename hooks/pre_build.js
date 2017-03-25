@@ -13,20 +13,11 @@ var copyPath = utils.copyPath,
     tupperwareJson = {};
 
 var log = utils.log,
-    suicide = utils.suicide,
     handleExecError = utils.handleExecError;
 
 var tupperwareJsonDefaults = {
-    "dependencies": {
-        "phantomJs": false,
-        "imageMagick": false
-    },
     "preBuildCommands": [],
-    "postBuildCommands": [],
-    "buildOptions": {
-        "mobileServerUrl": false,
-        "additionalFlags": false
-    }
+    "postBuildCommands": []
 };
 
 function extractTupperwareJson (done) {
