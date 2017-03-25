@@ -1,5 +1,7 @@
 FROM                  node:4.8.1-slim
 
+RUN                   yarn --help
+
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
