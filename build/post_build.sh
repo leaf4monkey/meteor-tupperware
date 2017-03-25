@@ -36,6 +36,7 @@ rm -rf /tmp/*
 # Clear npm cache
 npm cache clear
 yarn cache clean
+yarn uninstall -g node-gyp
 npm uninstall yarn -g
 
 if [ -z "$PORT" ]; then
