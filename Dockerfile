@@ -1,15 +1,12 @@
 FROM                  node:4.8.1-slim
 
-RUN                   yarn --help
-
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
 
 RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chown -R node:node /var/log && \
-                      chmod +x /tmp -R && chmod +x /scripts -R && \
-                      npm install -g yarn
+                      chmod +x /tmp -R && chmod +x /scripts -R
 
 ONBUILD COPY          ./ /home/node/app
 
