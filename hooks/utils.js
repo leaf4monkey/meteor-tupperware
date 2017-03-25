@@ -5,7 +5,8 @@
  */
 "use strict";
 
-var _ = require('lodash');
+var fs = require('fs'),
+    _ = require('lodash');
 
 var copyPath = '/home/node/app';
 
@@ -45,6 +46,14 @@ var log = {
     }
 };
 
+function appendFile (name, data) {
+    try {
+        return fs.appendFileSync('/tmp/hooks/' + name + '_build_env_setup.sh', data, 'utf8');
+    } catch (e) {
+        console.log('error occur:', e);
+    }
+}
+
 /* Utils */
 function suicide () {
     log.info('Container build failed. meteor-builder is exiting...');
@@ -70,6 +79,7 @@ function handleExecError(done, cmd, taskDesc, error, stdout, stderr) {
 }
 
 _.extend(exports, {
+    appendFile: appendFile,
     copyPath: copyPath,
     tupperwareJson: extractTupperwareJson(),
     log: log,

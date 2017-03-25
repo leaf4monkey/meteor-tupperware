@@ -16,3 +16,5 @@ echo DFT_METEOR_SETTINGS=$DFT_METEOR_SETTINGS
 
 echo "current meteor settings:"
 echo METEOR_SETTINGS=$METEOR_SETTINGS
+
+sh /tmp/hooks/post_build_env_setup.sh

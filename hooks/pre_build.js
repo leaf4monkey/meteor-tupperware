@@ -14,6 +14,7 @@ var fs = require('fs'),
 var copyPath = utils.copyPath;
 
 var log = utils.log,
+    appendFile = _.partial(utils.appendFile, 'pre'),
     handleExecError = utils.handleExecError,
     tupperwareJson = utils.tupperwareJson;
 
@@ -57,15 +58,12 @@ function loadSettings (done) {
     console.log('type of settings:', typeof settings, 'len=', settings.length);
     console.log(settings);
     if (_.isString(settings) && settings.length) {
-        var cmd = 'export \'DFT_METEOR_SETTINGS=' + settings + '\'';
-        child_process.exec(cmd, {
-            cwd: copyPath
-        }, _.partial(handleExecError, done, cmd, 'load settings.json'));
+        appendFile('export \'DFT_METEOR_SETTINGS=' + settings + '\'\n');
         log.info('Settings in settings.json registered.');
     } else {
         log.info('No settings.json found.');
-        done();
     }
+    done();
 }
 
 function selectMeteorVersion (done) {
@@ -76,39 +74,29 @@ function selectMeteorVersion (done) {
 
     var meteorVersion = matches[1];
 
-    log.info('Downloading Meteor ' + meteorVersion + ' Installer...');
-
     if (meteorVersion && meteorVersion !== process.env.METEOR_RELEASE) {
         log.info(meteorVersion, process.env.METEOR_RELEASE);
-        var cmd = 'export METEOR_RELEASE=' + meteorVersion;
-        child_process.exec(cmd, {
-            cwd: copyPath
-        }, _.partial(handleExecError, done, cmd, 'switch meteor version'));
+        appendFile('export METEOR_RELEASE="' + meteorVersion + '"\n');
         log.info('meteor version switched as "' + meteorVersion + '".');
-    } else {
-        done();
     }
+    done();
 }
 
 function setBuildFlags (done) {
     var additionalFlags = tupperwareJson.buildOptions.additionalFlags || '';
 
-    if (!additionalFlags) {
-        return done();
+    if (additionalFlags) {
+        appendFile('export ADDITIONAL_FLAGS="' + additionalFlags + '"\n');
     }
-    var cmd = 'export ADDITIONAL_FLAGS="' + additionalFlags + '"';
-    child_process.exec(cmd, {
-        cwd: copyPath
-    }, _.partial(handleExecError, done, cmd, 'concat additional flags'));
+    done();
 }
 
 function checkUser (done) {
     var user = tupperwareJson.runAsRoot ? 'root' : 'node';
 
-    var cmd = 'export APP_RUNNING_USER=' + user;
-    child_process.exec(cmd, {
-        cwd: copyPath
-    }, _.partial(handleExecError, done, cmd, 'decide running user'));
+    appendFile('export APP_RUNNING_USER=' + user);
+    log.info('Application will run with user: ' + user + '.\n');
+    done();
 }
 
 async.series([
