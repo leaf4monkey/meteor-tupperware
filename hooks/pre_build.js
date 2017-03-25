@@ -60,7 +60,32 @@ function runPreBuildCommands (done) {
     }
 }
 
+function loadSettings (done) {
+    log.info('Loading settings.json');
+    var settings;
+    try {
+        settings = require(copyPath + '/settings.json');
+        if (settings) {
+            settings = JSON.stringify(settings).replace(/\$/g, '$$');
+        }
+    } catch (e) {
+        log.info('No settings.json found, using defaults.');
+    }
+
+    if (settings && _.keys(settings).length) {
+        var cmd = 'export DFT_METEOR_SETTINGS=' + settings;
+        log.info(settings)
+        child_process.exec(cmd, {
+            cwd: copyPath
+        }, _.partial(handleExecError, done, cmd, 'load settings.json'));
+        log.info('Settings in settings.json registered.');
+    } else {
+        done();
+    }
+}
+
 async.series([
     extractTupperwareJson,
     runPreBuildCommands,
+    loadSettings
 ]);
