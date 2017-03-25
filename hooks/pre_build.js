@@ -101,10 +101,10 @@ function checkUser (done) {
 
 async.series([
     runPreBuildCommands,
-    loadSettings,
     selectMeteorVersion,
     setBuildFlags,
     checkUser,
+    loadSettings,
     function (done) {
         fs.readFile('/tmp/hooks/pre_build_env_setup.sh', function (err, data) {
             console.log(err);

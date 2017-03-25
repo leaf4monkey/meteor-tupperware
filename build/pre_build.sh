@@ -9,6 +9,7 @@ if [ -z "$PORT" ]; then
 fi
 
 node /tmp/hooks/pre_build.js
+cat /tmp/hooks/pre_build_env_setup.sh
 sh /tmp/hooks/pre_build_env_setup.sh
 
 echo "current meteor settings:"
