@@ -9,31 +9,11 @@ var fs = require('fs'),
     child_process = require('child_process'),
     utils = require('./utils');
 
-var copyPath = utils.copyPath,
-    tupperwareJson = {};
+var copyPath = utils.copyPath;
 
 var log = utils.log,
-    handleExecError = utils.handleExecError;
-
-var tupperwareJsonDefaults = {
-    "preBuildCommands": [],
-    "postBuildCommands": []
-};
-
-function extractTupperwareJson (done) {
-    /* Attempt to read in tupperware.json file for settings */
-    try {
-        tupperwareJson = require(copyPath + '/tupperware.json');
-        log.info('Settings in tupperware.json registered.');
-    } catch (e) {
-        log.info('No tupperware.json found, using defaults.');
-    }
-
-    /* Patch object with defaults for anything undefined */
-    _.defaults(tupperwareJson, tupperwareJsonDefaults);
-
-    done();
-}
+    handleExecError = utils.handleExecError,
+    tupperwareJson = utils.tupperwareJson;
 
 function runPreBuildCommands (done) {
     if (tupperwareJson.preBuildCommands.length > 0) {
@@ -69,7 +49,7 @@ function loadSettings (done) {
             settings = JSON.stringify(settings).replace(/\$/g, '\$\$');
         }
     } catch (e) {
-        log.info('No settings.json found, using defaults.');
+        console.log('It sames that settings.json is not good json-format');
     }
 
     if (_.isString(settings) && settings.length) {
@@ -79,12 +59,12 @@ function loadSettings (done) {
         }, _.partial(handleExecError, done, cmd, 'load settings.json'));
         log.info('Settings in settings.json registered.');
     } else {
+        log.info('No settings.json found.');
         done();
     }
 }
 
 async.series([
-    extractTupperwareJson,
     runPreBuildCommands,
     loadSettings
 ]);

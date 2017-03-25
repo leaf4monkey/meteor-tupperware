@@ -7,6 +7,25 @@ var _ = require('lodash');
 
 var copyPath = '/home/node/app';
 
+var tupperwareJsonDefaults = {
+    "preBuildCommands": [],
+    "postBuildCommands": []
+};
+
+function extractTupperwareJson () {
+    var tupperwareJson = {};
+    /* Attempt to read in tupperware.json file for settings */
+    try {
+        tupperwareJson = require(copyPath + '/tupperware.json');
+        log.info('Settings in tupperware.json registered.');
+    } catch (e) {
+        log.info('No tupperware.json found, using defaults.');
+    }
+
+    /* Patch object with defaults for anything undefined */
+    return _.defaults(tupperwareJson, tupperwareJsonDefaults);
+}
+
 var log = {
     info: function () {
         var args = Array.prototype.slice.apply(arguments);
@@ -46,6 +65,7 @@ function handleExecError(done, cmd, taskDesc, error, stdout, stderr) {
 
 _.extend(exports, {
     copyPath: copyPath,
+    tupperwareJson: extractTupperwareJson(),
     log: log,
     suicide: suicide,
     handleExecError: handleExecError

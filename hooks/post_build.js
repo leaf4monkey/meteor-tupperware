@@ -11,7 +11,8 @@ var _ = require('lodash'),
 var copyPath = utils.copyPath;
 
 var log = utils.log,
-    handleExecError = utils.handleExecError;
+    handleExecError = utils.handleExecError,
+    tupperwareJson = utils.tupperwareJson;
 
 function runPostBuildCommands (done) {
     if (tupperwareJson.postBuildCommands.length > 0) {
