@@ -10,6 +10,8 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
 
 ONBUILD COPY          ./ /home/node/app
 
+ONBUILD RUN           ls -la /home/node/app
+
 ONBUILD ENV           PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
 
 ONBUILD RUN           apt-get update && apt-get install build-essential g++ python make -y --no-install-recommends&& \
