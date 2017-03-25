@@ -16,6 +16,8 @@ ONBUILD ENV           PORT=3000 METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=tr
 
 ONBUILD RUN           apt-get update && apt-get install build-essential g++ python make -y --no-install-recommends&& \
 
+                      sh /tmp/build/npm_deps_install.sh && \
+
                       curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh && \
 
                       sh /tmp/build/pre_build.sh && \
