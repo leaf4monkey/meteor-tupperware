@@ -9,6 +9,7 @@ if [ -z "$PORT" ]; then
 fi
 
 node /tmp/hooks/pre_build.js
+echo /tmp/hooks/pre_build_env_setup.sh:
 cat /tmp/hooks/pre_build_env_setup.sh
 sh /tmp/hooks/pre_build_env_setup.sh
 
