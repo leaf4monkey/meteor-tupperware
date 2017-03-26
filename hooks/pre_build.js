@@ -44,27 +44,6 @@ function runPreBuildCommands (done) {
     }
 }
 
-function loadSettings (done) {
-    log.info('Loading settings.json');
-    var settings;
-    try {
-        settings = require(copyPath + '/settings.json');
-        if (settings) {
-            settings = JSON.stringify(settings).replace(/\$/g, '\$\$');
-        }
-    } catch (e) {
-        console.log('It sames that settings.json is not good json-format');
-    }
-
-    if (_.isString(settings) && settings.length) {
-        appendPreStartEnv('METEOR_SETTINGS', settings);
-        log.info('Settings in settings.json registered.');
-    } else {
-        log.info('No settings.json found.');
-    }
-    done();
-}
-
 function selectMeteorVersion (done) {
     var versionRegex = new RegExp('^METEOR@(.*)\n', 'ig');
 
@@ -74,7 +53,6 @@ function selectMeteorVersion (done) {
     var meteorVersion = matches[1];
 
     if (meteorVersion && meteorVersion !== process.env.METEOR_RELEASE) {
-        log.info(meteorVersion, process.env.METEOR_RELEASE);
         appendEnv('METEOR_RELEASE', meteorVersion);
         log.info('meteor version switched as "' + meteorVersion + '".');
     }
@@ -95,6 +73,27 @@ function checkUser (done) {
 
     appendEnv('APP_RUNNING_USER', user);
     log.info('Application will run with user: ' + user + '.');
+    done();
+}
+
+function loadSettings (done) {
+    log.info('Loading settings.json');
+    var settings;
+    try {
+        settings = require(copyPath + '/settings.json');
+        if (settings) {
+            settings = JSON.stringify(settings).replace(/\$/g, '\$\$');
+        }
+    } catch (e) {
+        console.log('It sames that settings.json is not good json-format');
+    }
+
+    if (_.isString(settings) && settings.length) {
+        appendPreStartEnv('METEOR_SETTINGS', settings);
+        log.info('Settings in settings.json registered.');
+    } else {
+        log.info('No settings.json found.');
+    }
     done();
 }
 
