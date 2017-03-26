@@ -1,9 +1,5 @@
 FROM                  node:4.8.1-slim
 
-COPY                  /etc/timezone /etc/timezone
-
-RUN                   cp /usr/share/zoneinfo/$(cat /etc/timezone | awk 'NR==1') /etc/localtime
-
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
@@ -13,6 +9,10 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chmod +x /tmp -R && chmod +x /scripts -R
 
 ENTRYPOINT            /scripts/startup.sh
+
+ONBUILD COPY          /etc/timezone /etc/timezone
+
+ONBUILD RUN           cp /usr/share/zoneinfo/$(cat /etc/timezone | awk 'NR==1') /etc/localtime
 
 ONBUILD COPY          ./ /home/node/app
 
