@@ -48,11 +48,9 @@ var log = {
 
 function appendFile (file, data) {
     try {
-        console.log('append cli: \n');
         fs.appendFileSync(file, '\n', 'utf8');
         fs.appendFileSync(file, data, 'utf8');
         fs.appendFileSync(file, '\n', 'utf8');
-        console.log(data);
     } catch (e) {
         console.log('error occur:', e);
     }
