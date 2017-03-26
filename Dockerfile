@@ -8,11 +8,11 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chown -R node:node /var/log && \
                       chmod +x /tmp -R && chmod +x /scripts -R
 
+VOLUME                /etc/timezone /etc/timezone
+
+VOLUME                /etc/localtime /etc/localtime
+
 ENTRYPOINT            /scripts/startup.sh
-
-ONBUILD COPY          /etc/timezone /etc/timezone
-
-ONBUILD RUN           cp /usr/share/zoneinfo/$(cat /etc/timezone | awk 'NR==1') /etc/localtime
 
 ONBUILD COPY          ./ /home/node/app
 
