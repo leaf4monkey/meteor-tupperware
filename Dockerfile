@@ -9,10 +9,6 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chmod +x /tmp -R && chmod +x /scripts -R && \
                       rm -rf /etc/timezone /etc/localtime
 
-VOLUME                /etc/timezone /etc/timezone
-
-VOLUME                /etc/localtime /etc/localtime
-
 ENTRYPOINT            /scripts/startup.sh
 
 ONBUILD COPY          ./ /home/node/app
