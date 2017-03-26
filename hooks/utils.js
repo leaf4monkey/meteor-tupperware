@@ -69,7 +69,7 @@ function appendEnv (name, key, val) {
 function appendPreStartEnv (key, val) {
     var cli = 'if [ -z "$' + key + '" ]; then\n' +
     '    export \'' + key + '=' + val + '\'\n' +
-    '    echo export ' + key + ' as preset val' +
+    '    echo export ' + key + ' as preset val\n' +
     'fi';
     appendFile('/scripts/pre_start.sh', cli);
 }
