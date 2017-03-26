@@ -5,8 +5,7 @@ rm -rf /home/node/app
 rm /usr/local/bin/meteor && rm -rf ~/.meteor
 
 # Purge build deps
-apt-get purge -y build-essential g++ python make
-apt-get remove --purge -y build-essential g++ python make
+apt-get purge -y --auto-remove build-essential g++ python make
 
 # Autoremove any junk
 apt-get clean -y
