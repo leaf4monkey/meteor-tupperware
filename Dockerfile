@@ -1,6 +1,6 @@
 FROM                  node:4.8.1-slim
 
-ADD                   /etc/timezone /etc/timezone
+COPY                  /etc/timezone /etc/timezone
 
 RUN                   cp /usr/share/zoneinfo/$(cat /etc/timezone | awk 'NR==1') /etc/localtime
 
