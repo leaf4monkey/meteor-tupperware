@@ -56,8 +56,6 @@ function loadSettings (done) {
         console.log('It sames that settings.json is not good json-format');
     }
 
-    console.log('type of settings:', typeof settings, 'len=', settings.length);
-    console.log(settings);
     if (_.isString(settings) && settings.length) {
         appendPreStartEnv('METEOR_SETTINGS', settings);
         log.info('Settings in settings.json registered.');
