@@ -8,7 +8,9 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chown -R node:node /var/log && \
                       chmod +x /tmp -R && chmod +x /scripts -R
 
-VOLUME                /etc/timezone /etc/timezone
+RUN                   rm -rf /etc/localtime /etc/localtime
+
+VOLUME                /etc/timezone /etc/localtime
 
 VOLUME                /etc/localtime /etc/localtime
 
