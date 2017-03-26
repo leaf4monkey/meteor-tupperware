@@ -46,17 +46,32 @@ var log = {
     }
 };
 
-function appendFile (name, data) {
-    name = '/tmp/hooks/' + name + '_build_env_setup.sh';
+function appendFile (file, data) {
     try {
         console.log('append cli: \n');
-        fs.appendFileSync(name, '\n', 'utf8');
-        fs.appendFileSync(name, data, 'utf8');
-        fs.appendFileSync(name, '\n', 'utf8');
+        fs.appendFileSync(file, '\n', 'utf8');
+        fs.appendFileSync(file, data, 'utf8');
+        fs.appendFileSync(file, '\n', 'utf8');
         console.log(data);
     } catch (e) {
         console.log('error occur:', e);
     }
+}
+
+function getExportCli (key, val) {
+    return 'export \'' + [key, val].join('=') + '\'';
+}
+
+function appendEnv (name, key, val) {
+    appendFile('/tmp/hooks/' + name + '_build_env_setup.sh', getExportCli(key, val));
+}
+
+function appendPreStartEnv (key, val) {
+    var cli = 'if [ -z "$' + key + '" ]; then\n' +
+    '    export \'' + key + '=' + val + '\'\n' +
+    '    echo export ' + key + ' as preset val' +
+    'fi';
+    appendFile('/scripts/pre_start.sh', cli);
 }
 
 /* Utils */
@@ -84,7 +99,8 @@ function handleExecError(done, cmd, taskDesc, error, stdout, stderr) {
 }
 
 _.extend(exports, {
-    appendFile: appendFile,
+    appendEnv: appendEnv,
+    appendPreStartEnv: appendPreStartEnv,
     copyPath: copyPath,
     tupperwareJson: extractTupperwareJson(),
     log: log,
