@@ -16,10 +16,10 @@ ONBUILD ENV           METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
 
 ONBUILD RUN           apt-get update && apt-get install build-essential g++ python make -y --no-install-recommends&& \
                       sh /tmp/build/npm_deps_install.sh && \
-                      sh /tmp/build/pre_build.sh && \
+                      . /tmp/build/pre_build.sh && \
                       curl https://install.meteor.com/?release=${METEOR_RELEASE} | sh && \
                       sh /tmp/build/build.sh && \
-                      sh /tmp/build/post_build.sh && \
+                      . /tmp/build/post_build.sh && \
                       sh /tmp/build/post_build_clean.sh
 
 ONBUILD USER          $APP_RUNNING_USER

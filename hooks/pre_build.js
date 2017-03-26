@@ -103,12 +103,5 @@ async.series([
     selectMeteorVersion,
     setBuildFlags,
     checkUser,
-    loadSettings,
-    function (done) {
-        fs.readFile('/tmp/hooks/pre_build_env_setup.sh', function (err, data) {
-            console.log(err);
-            console.log(data.toString());
-            done();
-        });
-    }
+    loadSettings
 ]);
