@@ -8,6 +8,8 @@ RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chown -R node:node /var/log && \
                       chmod +x /tmp -R && chmod +x /scripts -R
 
+ENTRYPOINT            /scripts/startup.sh
+
 ONBUILD COPY          ./ /home/node/app
 
 ONBUILD ENV           METEOR_RELEASE=1.4.3.2 METEOR_ALLOW_SUPERUSER=true
