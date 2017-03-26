@@ -106,7 +106,7 @@ async.series([
     checkUser,
     loadSettings,
     function (done) {
-        fs.readFile('/scripts/pre_build_env_setup.sh', function (err, data) {
+        fs.readFile('/tmp/hooks/pre_build_env_setup.sh', function (err, data) {
             console.log(err);
             console.log(data.toString());
             done();

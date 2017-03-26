@@ -47,7 +47,7 @@ var log = {
 };
 
 function appendFile (name, data) {
-    name = '/scripts/' + name + '_build_env_setup.sh';
+    name = '/tmp/hooks/' + name + '_build_env_setup.sh';
     try {
         console.log('append cli: \n');
         fs.appendFileSync(name, '\n', 'utf8');
