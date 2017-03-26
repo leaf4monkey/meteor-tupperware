@@ -6,11 +6,10 @@ COPY                  . /tmp
 
 RUN                   mkdir /home/node/output && mkdir /home/node/app && \
                       chown -R node:node /var/log && \
-                      chmod +x /tmp -R && chmod +x /scripts -R
+                      chmod +x /tmp -R && chmod +x /scripts -R && \
+                      rm -rf /etc/timezone /etc/localtime
 
-RUN                   rm -rf /etc/localtime /etc/localtime
-
-VOLUME                /etc/timezone /etc/localtime
+VOLUME                /etc/timezone /etc/timezone
 
 VOLUME                /etc/localtime /etc/localtime
 
