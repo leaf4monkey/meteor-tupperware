@@ -16,6 +16,7 @@ var tupperwareJsonDefaults = {
     "buildOptions": {
         "additionalFlags": false
     },
+    "prodSettings": "settings.json",
     "runAsRoot": true
 };
 

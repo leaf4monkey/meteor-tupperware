@@ -77,15 +77,16 @@ function checkUser (done) {
 }
 
 function loadSettings (done) {
-    log.info('Loading settings.json');
+    tupperwareJson.prodSettings = tupperwareJson.prodSettings || 'settings.json';
+    log.info('Loading settings from ' + tupperwareJson.prodSettings);
     var settings;
     try {
-        settings = require(copyPath + '/settings.json');
+        settings = require(copyPath + '/' + tupperwareJson.prodSettings);
         if (settings) {
             settings = JSON.stringify(settings).replace(/\$/g, '\$\$');
         }
     } catch (e) {
-        console.log('It sames that settings.json is not good json-format');
+        console.log('It sames that ' + tupperwareJson.prodSettings + ' is not json-formatted.');
     }
 
     if (_.isString(settings) && settings.length) {
