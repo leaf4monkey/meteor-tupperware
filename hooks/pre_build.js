@@ -20,6 +20,7 @@ var log = utils.log,
     tupperwareJson = utils.tupperwareJson;
 
 function runPreBuildCommands (done) {
+    tupperwareJson.preBuildCommands.push('echo =================$SOME_TEST_KEY=================');
     if (tupperwareJson.preBuildCommands.length > 0) {
         log.info('Running pre-build commands...');
 

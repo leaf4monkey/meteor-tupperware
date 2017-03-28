@@ -1,5 +1,7 @@
 FROM                  node:4.8.1-slim
 
+ENV                   SOME_TEST_KEY="this is a test key."
+
 COPY                  ./run/* /scripts/
 
 COPY                  . /tmp
