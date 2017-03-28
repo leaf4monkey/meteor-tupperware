@@ -15,6 +15,7 @@ var copyPath = utils.copyPath;
 
 var log = utils.log,
     appendEnv = _.partial(utils.appendEnv, 'pre'),
+    appendPreStartEnv = utils.appendPreStartEnv,
     handleExecError = utils.handleExecError,
     tupperwareJson = utils.tupperwareJson;
 
@@ -75,9 +76,32 @@ function checkUser (done) {
     done();
 }
 
+function loadSettings (done) {
+    tupperwareJson.prodSettings = tupperwareJson.prodSettings || 'settings.json';
+    log.info('Loading settings from ' + tupperwareJson.prodSettings);
+    var settings;
+    try {
+        settings = require(copyPath + '/' + tupperwareJson.prodSettings);
+        if (settings) {
+            settings = JSON.stringify(settings).replace(/\$/g, '\$\$');
+        }
+    } catch (e) {
+        console.log('It sames that ' + tupperwareJson.prodSettings + ' is not json-formatted.');
+    }
+
+    if (_.isString(settings) && settings.length) {
+        appendPreStartEnv('METEOR_SETTINGS', settings);
+        log.info('Settings in settings.json registered.');
+    } else {
+        log.info('No settings.json found.');
+    }
+    done();
+}
+
 async.series([
     runPreBuildCommands,
     selectMeteorVersion,
     setBuildFlags,
     checkUser,
+    loadSettings
 ]);

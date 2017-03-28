@@ -23,8 +23,6 @@ ONBUILD RUN           apt-get update && apt-get install build-essential g++ pyth
                       . /tmp/build/post_build.sh && \
                       sh /tmp/build/post_build_clean.sh
 
-ONBUILD RUN           node /tmp/hooks/load_settings.js
-
 ONBUILD USER          $APP_RUNNING_USER
 
 ONBUILD WORKDIR       /home/node/output/bundle
