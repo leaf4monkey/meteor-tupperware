@@ -1,3 +1,3 @@
-yarn global add node-gyp &&
-(cd /tmp/hooks && yarn install)
-(cd /home/node/app/ && yarn install)
+npm i -g node-gyp &&
+(cd /tmp/hooks && npm install)
+(cd /home/node/app/ && npm install)

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd /home/node/output/bundle/programs/server
-yarn install
+npm install
 
 chown -R node:node /home/node/output
 
